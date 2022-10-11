@@ -1,4 +1,4 @@
-import { People } from '@mui/icons-material';
+
 import { Typography, Grid, Button, Card, CardContent,  } from '@mui/material';
 import React from 'react';
 import {Link} from 'react-router-dom'
@@ -18,7 +18,9 @@ const TestGrid = () => {
                         return (
                             <Grid item xs={6} md={2}>
                                 <Card>
-                                    <CardContent>{value}</CardContent>
+                                    <CardContent>
+                                        {value}
+                                    </CardContent>
                                 </Card>
                             </Grid>  
                         )
