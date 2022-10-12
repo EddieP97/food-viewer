@@ -1,8 +1,15 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, TextField, Typography } from '@mui/material'
 import React from 'react'
 //import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import { useNavigate } from 'react-router-dom';
 
-const SearchResults = ({food, title}) => {
+const SearchResults = ({food, title, setRestId }) => {
+
+    const navigate = useNavigate()
+    const goToDetails = (id) => {
+        setRestId(id)
+        navigate("/detail")
+    }
 
     return(
         <>
@@ -39,21 +46,19 @@ const SearchResults = ({food, title}) => {
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
                                         {value.location.address1} <br/>
-                                        {value.location.city}, {value.location.state} <br/>
-                                        Rating: {value.rating} ({value.review_count})
+                                        {value.location.city}, {value.location.state} {" "}
+                                        {value.location.zip_code}
                                         </Typography>
                                         <Typography>
-                                        
                                         <Rating name="half-rating-read" defaultValue={value.rating} precision={0.5} readOnly />
                                         ({value.review_count})
                                         </Typography>
                                         <Typography>
-                                        <li>{value.transactions}</li>
+                                            {value.transactions} 
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">Share</Button>
-                                        <Button size="small">Learn More</Button>
+                                        <Button size="small" onClick={(e) => goToDetails(value.id)}>Details</Button>
                                     </CardActions>
                                     </Card>
                             </Grid>  
