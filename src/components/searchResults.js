@@ -1,5 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material'
 import React from 'react'
+//import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 
 const SearchResults = ({food, title}) => {
 
@@ -40,6 +41,14 @@ const SearchResults = ({food, title}) => {
                                         {value.location.address1} <br/>
                                         {value.location.city}, {value.location.state} <br/>
                                         Rating: {value.rating} ({value.review_count})
+                                        </Typography>
+                                        <Typography>
+                                        
+                                        <Rating name="half-rating-read" defaultValue={value.rating} precision={0.5} readOnly />
+                                        ({value.review_count})
+                                        </Typography>
+                                        <Typography>
+                                        <li>{value.transactions}</li>
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
