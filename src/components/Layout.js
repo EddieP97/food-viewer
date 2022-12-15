@@ -5,7 +5,7 @@ import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import yelp from '../api/yelp'
+//import yelp from '../api/yelp'
 
 const Layout = () => {
     const [searchText, setSearchText] = useState("I'm here")
@@ -14,13 +14,15 @@ const Layout = () => {
     //let mySearchTest = "I'm here."
 
     const searchApi = async (term) => {
-        const response = await yelp('92688', term)
-        console.log(response.data.businesses)
-        setResults(response.data.businesses)
+        //const response = await yelp('92688', term)
+        //console.log(response.data.businesses)
+        //setResults(response.data.businesses)
+        const location = '92688'
 
-        const response2 = await fetch("/api/yelp")
+        const response2 = await fetch(`/api/yelp?term=${term}&location=${location}`)
         const data = await response2.json()
-        console.log(data)
+        console.log("hi", data)
+        setResults(data.businesses)
     }
 
     const doSearch = (e) => {

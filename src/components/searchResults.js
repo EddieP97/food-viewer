@@ -1,7 +1,14 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, Rating, Typography} from '@mui/material'
 import React from 'react'
 //import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import { useNavigate } from 'react-router-dom';
+import SignalCellular1BarRoundedIcon from '@mui/icons-material/SignalCellular1BarRounded';
+import SignalCellular2BarRoundedIcon from '@mui/icons-material/SignalCellular2BarRounded';
+import SignalCellular3BarRoundedIcon from '@mui/icons-material/SignalCellular3BarRounded';
+import SignalCellular4BarRoundedIcon from '@mui/icons-material/SignalCellular4BarRounded';
+import TakeoutDiningIcon from '@mui/icons-material/TakeoutDining';
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import BookOnlineIcon from '@mui/icons-material/BookOnline';
 
 const SearchResults = ({food, title, setRestId }) => {
 
@@ -47,15 +54,79 @@ const SearchResults = ({food, title, setRestId }) => {
                                         <Typography variant="body2" color="text.secondary">
                                         {value.location.address1} <br/>
                                         {value.location.city}, {value.location.state} {" "}
-                                        {value.location.zip_code}
+                                        {value.location.zip_code} <br/>
+                                        <b>{value.display_phone}</b>
                                         </Typography>
                                         <Typography>
                                         <Rating name="half-rating-read" defaultValue={value.rating} precision={0.5} readOnly />
-                                        ({value.review_count})
+                                        ({value.review_count}) <br/>
+
+                                        
+                                        {
+                                            value.transactions.map( (value2, index2) => {
+                                                return(
+                                                    
+                                                    <Typography display="inLine">
+                                                        {
+                                                            (value2 === "delivery")?(
+                                                                <DeliveryDiningIcon/>
+                                                            ):(
+                                                                <></>
+                                                            )
+                                                        }
+                                                        {
+                                                            (value2 === "pickup")?(
+                                                                <TakeoutDiningIcon/>
+                                                            ):(
+                                                                <></>
+                                                            )
+                                                        }
+                                                        {
+                                                            (value2 === "restaurant_reservation")?(
+                                                                <BookOnlineIcon/>
+                                                            ):(
+                                                                <></>
+                                                            )
+                                                        }
+                                                        
+                                                    </Typography>
+                                                )
+                                            }
+
+                                            )
+                                        }
                                         </Typography>
                                         <Typography>
-                                            {value.transactions} 
+                                        {
+                                            (value.review_count <= 100)?(
+                                                <SignalCellular1BarRoundedIcon/>
+                                            ):(
+                                                <></>
+                                            ) 
+                                        }
+                                        {
+                                            (value.review_count >= 101 && value.review_count <= 500)?(
+                                               <SignalCellular2BarRoundedIcon/> 
+                                            ):(
+                                                <></>
+                                            )
+                                        }
+                                        {
+                                           (value.review_count >= 501 && value.review_count <= 1000)?(
+                                            <SignalCellular3BarRoundedIcon/>
+                                        ):(
+                                            <></>
+                                        ) 
+                                        }
+                                        {
+                                            (value.review_count >= 1001)?(
+                                                <SignalCellular4BarRoundedIcon/>
+                                            ):(
+                                                <></>
+                                            )
+                                        }
                                         </Typography>
+
                                     </CardContent>
                                     <CardActions>
                                         <Button size="small" onClick={(e) => goToDetails(value.id)}>Details</Button>
